@@ -25,6 +25,30 @@ public:
 	}
 };
 
+class TwoPointSolution {
+public:
+	int maxArea(vector<int>& height) {
+
+		int iMaxArea = 0;
+		unsigned int iLeft = 0;
+		unsigned int iRight = height.size() - 1;
+
+		while (iLeft < iRight)
+		{
+			int iTmpArea = min(height.at(iLeft), height.at(iRight)) * (iRight - iLeft);
+
+			iMaxArea = iMaxArea < iTmpArea ? iTmpArea : iMaxArea;
+
+			if (height.at(iLeft) > height.at(iRight))
+				iRight--;
+			else
+				iLeft++;
+		}
+
+		return iMaxArea;
+	}
+};
+
 int main()
 {
 	int iTempValue = 0;
@@ -33,8 +57,8 @@ int main()
 	while (cin >> iTempValue)
 		vecInput.push_back(iTempValue);
 
-	Solution oSolution;
-	cout << oSolution.maxArea(vecInput) << endl;
+	TwoPointSolution oTwoPointSolution;
+	cout << oTwoPointSolution.maxArea(vecInput) << endl;
 
 	system("PAUSE");
 	return 0;
